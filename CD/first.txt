@@ -1,0 +1,51 @@
+#include<stdio.h>
+#include<ctype.h>
+void FIRST(char c);
+char productions[10][10];
+int First[10];
+int num;
+int n;
+
+void main()
+{
+    int i;
+    char ch,c;
+    int choice;
+    printf("Enter num of productions: ");
+    scanf("%d",&num);
+    for(int i=0;i<num;i++){
+        scanf("%s%c",productions[i],&ch);
+    }
+    do{
+        n=0;
+        printf("Enter character: ");
+        scanf("%c",&c);
+        FIRST(c);
+        printf("\nFIRST(%c)={ ",c);
+        for(int i=0;i<n;i++){
+            printf("%c",First[i]);
+        }
+        printf("}\n");
+        printf("Enter 1 to find first");
+        scanf("%d%c",&choice,&ch);
+    }while(choice==1);
+}
+
+void FIRST(char c){
+    if(!isupper(c)){
+        First[n++]=c;
+    }
+    for(int i=0;i<num;i++){
+        if(productions[i][0]==c){
+            if(productions[i][2]=='$'){
+                First[n++] = '$';
+            }
+            else if(islower(productions[i][2])){
+                First[n++] = productions[i][2];
+            }
+            else{
+                FIRST(productions[i][2]);
+            }
+        }
+    }
+}
