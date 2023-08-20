@@ -1,0 +1,4 @@
+flex fileName.l
+yacc -d fileName.y
+gcc lex.yy.c fileName.tab.c
+a.exe
