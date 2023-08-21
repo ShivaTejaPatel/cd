@@ -1,0 +1,17 @@
+%option noyywrap
+%{
+	#include<stdio.h>
+%}
+
+%%
+is|are|while|for|print|do|was	 {printf("\n%s - verb\n",yytext);}
+cleverly|bravly|slow|fast|high|low|good	{printf("%s - adjective\n",yytext);}
+He|a|boy {};
+
+%%
+int main()
+{
+	printf("enter the string \n");
+	yylex();
+	return 0;
+}
